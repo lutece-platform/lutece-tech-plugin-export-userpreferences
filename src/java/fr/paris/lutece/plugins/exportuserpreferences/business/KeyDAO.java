@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *	 and the following disclaimer.
+ *         and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *	 and the following disclaimer in the documentation and/or other materials
- *	 provided with the distribution.
+ *         and the following disclaimer in the documentation and/or other materials
+ *         provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *	 contributors may be used to endorse or promote products derived from
- *	 this software without specific prior written permission.
+ *         contributors may be used to endorse or promote products derived from
+ *         this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,8 +31,6 @@
  *
  * License 1.0
  */
-
-
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
 import fr.paris.lutece.plugins.exportuserpreferences.utils.CsvUtils;
@@ -46,10 +44,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * This class provides Data Access methods for Key objects
  */
-
 public final class KeyDAO implements IKeyDAO
 {
     // Constants
@@ -59,16 +57,14 @@ public final class KeyDAO implements IKeyDAO
     private static final String SQL_QUERY_UPDATE = "UPDATE exportuserpreferences_key SET pref_key = ?, to_export = ? WHERE pref_key = ?";
     private static final String SQL_QUERY_SELECTALL = "SELECT pref_key, to_export FROM exportuserpreferences_key";
     private static final String SQL_QUERY_SELECTALL_PREFKEY = "SELECT pref_key FROM exportuserpreferences_key";
-
     private static final String SQL_QUERY_SELECT_TOEXPORT = "SELECT pref_key FROM exportuserpreferences_key WHERE to_export = 1";
-    private static final String SQL_SELECT_VALUES = "SELECT DISTINCT "
-            + "core_user_preferences.id_user, core_user_preferences.pref_key, core_user_preferences.pref_value "
-            + "FROM core_user_preferences "
-            + "LEFT JOIN exportuserpreferences_key ON core_user_preferences.pref_key LIKE exportuserpreferences_key.pref_key "
-            + "WHERE exportuserpreferences_key.to_export = 1";
-    private static final String SQL_QUERY_SELECT_AVAILABLEKEYS = "SELECT DISTINCT pref_key FROM core_user_preferences cup " 
-            + "WHERE NOT EXISTS (SELECT pref_key FROM exportuserpreferences_key ek WHERE cup.pref_key = ek.pref_key)";
-    
+    private static final String SQL_SELECT_VALUES = "SELECT DISTINCT " +
+        "core_user_preferences.id_user, core_user_preferences.pref_key, core_user_preferences.pref_value " +
+        "FROM core_user_preferences " +
+        "LEFT JOIN exportuserpreferences_key ON core_user_preferences.pref_key LIKE exportuserpreferences_key.pref_key " +
+        "WHERE exportuserpreferences_key.to_export = 1";
+    private static final String SQL_QUERY_SELECT_AVAILABLEKEYS = "SELECT DISTINCT pref_key FROM core_user_preferences cup " +
+        "WHERE NOT EXISTS (SELECT pref_key FROM exportuserpreferences_key ek WHERE cup.pref_key = ek.pref_key)";
 
     /**
      * {@inheritDoc }
@@ -78,11 +74,11 @@ public final class KeyDAO implements IKeyDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
 
-        daoUtil.setString( 1, key.getPrefKey( ) );
-        daoUtil.setBoolean( 2, key.getToExport( ) );
+        daoUtil.setString( 1, key.getPrefKey(  ) );
+        daoUtil.setBoolean( 2, key.getToExport(  ) );
 
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -92,19 +88,20 @@ public final class KeyDAO implements IKeyDAO
     public Key load( String strPrefKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setString( 1 , strPrefKey );
-        daoUtil.executeQuery( );
+        daoUtil.setString( 1, strPrefKey );
+        daoUtil.executeQuery(  );
 
         Key key = null;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
-            key = new Key();
+            key = new Key(  );
             key.setPrefKey( daoUtil.getString( 1 ) );
             key.setToExport( daoUtil.getBoolean( 2 ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
+
         return key;
     }
 
@@ -115,9 +112,9 @@ public final class KeyDAO implements IKeyDAO
     public void delete( String strPrefKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setString( 1 , strPrefKey );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.setString( 1, strPrefKey );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -127,13 +124,13 @@ public final class KeyDAO implements IKeyDAO
     public void store( Key key, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
-        
-        daoUtil.setString( 1, key.getPrefKey( ) );
-        daoUtil.setBoolean( 2, key.getToExport( ) );
-        daoUtil.setString( 3, key.getPrefKey( ) );
 
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.setString( 1, key.getPrefKey(  ) );
+        daoUtil.setBoolean( 2, key.getToExport(  ) );
+        daoUtil.setString( 3, key.getPrefKey(  ) );
+
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -149,34 +146,36 @@ public final class KeyDAO implements IKeyDAO
         while ( daoUtil.next(  ) )
         {
             Key key = new Key(  );
-            
+
             key.setPrefKey( daoUtil.getString( 1 ) );
             key.setToExport( daoUtil.getBoolean( 2 ) );
 
             keyList.add( key );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
+
         return keyList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public Collection<String> selectPrefKeysList( Plugin plugin )
     {
-            Collection<String> keyList = new ArrayList<String>( );
-            DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_PREFKEY, plugin );
-            daoUtil.executeQuery(  );
+        Collection<String> keyList = new ArrayList<String>(  );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_PREFKEY, plugin );
+        daoUtil.executeQuery(  );
 
-            while ( daoUtil.next(  ) )
-            {
-                keyList.add( daoUtil.getString( 1 ) );
-            }
+        while ( daoUtil.next(  ) )
+        {
+            keyList.add( daoUtil.getString( 1 ) );
+        }
 
-            daoUtil.free( );
-            return keyList;
+        daoUtil.free(  );
+
+        return keyList;
     }
 
     /**
@@ -194,10 +193,11 @@ public final class KeyDAO implements IKeyDAO
             keyList.add( daoUtil.getString( 1 ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
+
         return keyList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
@@ -208,31 +208,34 @@ public final class KeyDAO implements IKeyDAO
         Map<String, Integer> headers = CsvUtils.getHeaderLineOrder( KeyJspBean.MARK_USERPREFERENCES );
         DAOUtil daoUtil = new DAOUtil( SQL_SELECT_VALUES, plugin );
         daoUtil.executeQuery(  );
+
         //ArrayList<String> keysToExportList = (ArrayList<String>) selectToExportKeysList( plugin );
-        
         while ( daoUtil.next(  ) )
         {
             ArrayList<String> values = map.get( daoUtil.getString( 1 ) );
             String prefValue = daoUtil.getString( 3 );
             String prefKey = daoUtil.getString( 2 );
             Integer valuePosition = headers.get( prefKey );
+
             if ( values == null )
             {
-                values = new ArrayList<String>( headers.size() );
-                
+                values = new ArrayList<String>( headers.size(  ) );
+
                 for ( int n = 0; n < valuePosition; n++ )
                 {
                     values.add( "" );
                 }
+
                 values.add( valuePosition, prefValue );
                 map.put( daoUtil.getString( 1 ), values );
             }
             else
             {
-                for ( int n = values.size(); n < valuePosition; n++ )
+                for ( int n = values.size(  ); n < valuePosition; n++ )
                 {
                     values.add( "" );
                 }
+
                 values.add( valuePosition, prefValue );
             }
         }
@@ -241,7 +244,7 @@ public final class KeyDAO implements IKeyDAO
 
         return map;
     }
-    
+
     /**
      * {@inheritDoc }
      */
@@ -257,7 +260,8 @@ public final class KeyDAO implements IKeyDAO
             keyList.add( daoUtil.getString( 1 ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
+
         return keyList;
     }
 }

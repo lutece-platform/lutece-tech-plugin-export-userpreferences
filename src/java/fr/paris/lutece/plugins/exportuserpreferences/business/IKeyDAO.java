@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2002-2015, Mairie de Paris
  * All rights reserved.
@@ -8,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *	 and the following disclaimer.
+ *         and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *	 and the following disclaimer in the documentation and/or other materials
- *	 provided with the distribution.
+ *         and the following disclaimer in the documentation and/or other materials
+ *         provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *	 contributors may be used to endorse or promote products derived from
- *	 this software without specific prior written permission.
+ *         contributors may be used to endorse or promote products derived from
+ *         this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,7 +31,6 @@
  *
  * License 1.0
  */
- 
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -40,7 +38,6 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-
 
 
 /**
@@ -86,16 +83,17 @@ public interface IKeyDAO
      * @return The collection which contains the data of all the key objects
      */
     Collection<Key> selectKeysList( Plugin plugin );
-    
+
     /**
      * Load the pref_key of all the key objects and returns them as a collection
      * @param plugin the Plugin
      * @return The collection which contains the pref_key of all the key objects
      */
     Collection<String> selectPrefKeysList( Plugin plugin );
-    
+
     Collection<String> selectToExportKeysList( Plugin plugin );
+
     Map<String, ArrayList<String>> getValuesList( Plugin plugin );
+
     Collection<String> selectAvailableKeysList( Plugin plugin );
 }
-

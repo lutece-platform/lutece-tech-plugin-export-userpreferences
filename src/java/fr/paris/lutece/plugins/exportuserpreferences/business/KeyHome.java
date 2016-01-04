@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *	 and the following disclaimer.
+ *         and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *	 and the following disclaimer in the documentation and/or other materials
- *	 provided with the distribution.
+ *         and the following disclaimer in the documentation and/or other materials
+ *         provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *	 contributors may be used to endorse or promote products derived from
- *	 this software without specific prior written permission.
+ *         contributors may be used to endorse or promote products derived from
+ *         this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,7 +31,6 @@
  *
  * License 1.0
  */
- 
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -42,14 +41,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+
 /**
  * This class provides instances management methods (create, find, ...) for Key objects
  */
-
 public final class KeyHome
 {
     // Static variable pointed at the DAO instance
-
     private static IKeyDAO _dao = SpringContextService.getBean( "exportuserpreferences.keyDAO" );
     private static Plugin _plugin = PluginService.getPlugin( "exportuserpreferences" );
 
@@ -103,41 +101,41 @@ public final class KeyHome
      */
     public static Key findByPrimaryKey( String strPrefKey )
     {
-        return _dao.load( strPrefKey, _plugin);
+        return _dao.load( strPrefKey, _plugin );
     }
 
     /**
      * Load the data of all the key objects and returns them in form of a collection
      * @return the collection which contains the data of all the key objects
      */
-    public static Collection<Key> getKeysList( )
+    public static Collection<Key> getKeysList(  )
     {
         return _dao.selectKeysList( _plugin );
     }
-    
+
     /**
      * Load the pref_key of all the key objects and returns them in form of a collection
      * @return the collection which contains the pref_key of all the key objects
      */
-    public static Collection<String> getPrefKeysList( )
+    public static Collection<String> getPrefKeysList(  )
     {
         return _dao.selectPrefKeysList( _plugin );
     }
-    
+
     /**
      * Load the pref_key of all the key objects which are exported and returns them in form of a collection
      * @return the collection which contains the pref_key of all the key objects
      */
-    public static Collection<String> getToExportKeysList( )
+    public static Collection<String> getToExportKeysList(  )
     {
         return _dao.selectToExportKeysList( _plugin );
     }
-    
+
     /**
      * Load the values which are exported and returns them in form of a map
      * @return the map which contains the (user_id -> values of its keys) of all the key objects to export
      */
-    public static Map<String, ArrayList<String>> getValuesList( )
+    public static Map<String, ArrayList<String>> getValuesList(  )
     {
         return _dao.getValuesList( _plugin );
     }
@@ -146,9 +144,8 @@ public final class KeyHome
      * Load all the pref_key which are added in the create_key form and returns them in form of a collection
      * @return the collection which contains the pref_key of all the key objects
      */
-    public static Collection<String> getAvailableKeysList( )
+    public static Collection<String> getAvailableKeysList(  )
     {
         return _dao.selectAvailableKeysList( _plugin );
     }
 }
-

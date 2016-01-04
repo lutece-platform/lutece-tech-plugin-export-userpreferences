@@ -31,7 +31,6 @@
  *
  * License 1.0
  */
-
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
@@ -41,36 +40,35 @@ public class KeyBusinessTest extends LuteceTestCase
 {
     private final static String PREFKEY1 = "PrefKey1";
     private final static String PREFKEY2 = "PrefKey2";
-	private final static boolean TOEXPORT1 = true;
+    private final static boolean TOEXPORT1 = true;
     private final static boolean TOEXPORT2 = false;
 
     public void testBusiness(  )
     {
         // Initialize an object
-        Key key = new Key();
+        Key key = new Key(  );
         key.setPrefKey( PREFKEY1 );
         key.setToExport( TOEXPORT1 );
 
         // Create test
         KeyHome.create( key );
-        Key keyStored = KeyHome.findByPrimaryKey( key.getPrefKey( ) );
-        assertEquals( keyStored.getToExport() , key.getToExport( ) );
+
+        Key keyStored = KeyHome.findByPrimaryKey( key.getPrefKey(  ) );
+        assertEquals( keyStored.getToExport(  ), key.getToExport(  ) );
 
         // Update test
         key.setPrefKey( PREFKEY2 );
         key.setToExport( TOEXPORT2 );
         KeyHome.update( key );
-        keyStored = KeyHome.findByPrimaryKey( key.getPrefKey( ) );
-        assertEquals( keyStored.getToExport() , key.getToExport( ) );
+        keyStored = KeyHome.findByPrimaryKey( key.getPrefKey(  ) );
+        assertEquals( keyStored.getToExport(  ), key.getToExport(  ) );
 
         // List test
-        KeyHome.getKeysList();
+        KeyHome.getKeysList(  );
 
         // Delete test
-        KeyHome.remove( key.getPrefKey( ) );
-        keyStored = KeyHome.findByPrimaryKey( key.getPrefKey( ) );
+        KeyHome.remove( key.getPrefKey(  ) );
+        keyStored = KeyHome.findByPrimaryKey( key.getPrefKey(  ) );
         assertNull( keyStored );
-        
     }
-
 }

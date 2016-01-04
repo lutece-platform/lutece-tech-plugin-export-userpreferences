@@ -31,8 +31,6 @@
  *
  * License 1.0
  */
-
- 
 package fr.paris.lutece.plugins.exportuserpreferences.web;
 
 import fr.paris.lutece.plugins.exportuserpreferences.business.Key;
@@ -50,11 +48,11 @@ import fr.paris.lutece.util.url.UrlItem;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,7 +64,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller( controllerJsp = "ManageKeys.jsp", controllerPath = "jsp/admin/plugins/exportuserpreferences/", right = "EXPORTUSERPREFERENCES_MANAGEMENT" )
 public class KeyJspBean extends ManageExportuserpreferencesJspBean
 {
-
     ////////////////////////////////////////////////////////////////////////////
     // Constants
 
@@ -74,7 +71,6 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
     private static final String TEMPLATE_MANAGE_KEYS = "/admin/plugins/exportuserpreferences/manage_keys.html";
     private static final String TEMPLATE_CREATE_KEY = "/admin/plugins/exportuserpreferences/create_key.html";
     private static final String TEMPLATE_MODIFY_KEY = "/admin/plugins/exportuserpreferences/modify_key.html";
-
 
     // Parameters
     private static final String PARAMETER_PREF_KEY = "pref_key";
@@ -88,13 +84,11 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
     private static final String MARK_KEY_LIST = "key_list";
     private static final String MARK_KEY = "key";
     private static final String MARK_LIST_AVAILABLE_KEYS = "list_available_keys";
-
     private static final String JSP_MANAGE_KEYS = "jsp/admin/plugins/exportuserpreferences/ManageKeys.jsp";
 
     // Properties
     private static final String MESSAGE_CONFIRM_REMOVE_KEY = "exportuserpreferences.message.confirmRemoveKey";
     private static final String PROPERTY_DEFAULT_LIST_KEY_PER_PAGE = "exportuserpreferences.listKeys.itemsPerPage";
- 
     private static final String VALIDATION_ATTRIBUTES_PREFIX = "exportuserpreferences.model.entity.key.attribute.";
 
     // Views
@@ -112,19 +106,18 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
     private static final String INFO_KEY_CREATED = "exportuserpreferences.info.key.created";
     private static final String INFO_KEY_UPDATED = "exportuserpreferences.info.key.updated";
     private static final String INFO_KEY_REMOVED = "exportuserpreferences.info.key.removed";
-    
-    // Session variable to store working values
-    private Key _key;
-    
     private static final String PROPERTY_CSV_EXTENSION = "exportuserpreferences.csv.extension";
     private static final String PROPERTY_CSV_FILE_NAME = "exportuserpreferences.csv.file.name";
     public static final String MARK_USERPREFERENCES = "USERPREFERENCES";
 
-    
+    // Session variable to store working values
+    private Key _key;
+
     @View( value = VIEW_MANAGE_KEYS, defaultView = true )
     public String getManageKeys( HttpServletRequest request )
     {
         _key = null;
+
         List<Key> listKeys = (List<Key>) KeyHome.getKeysList(  );
         Map<String, Object> model = getPaginatedListModel( request, MARK_KEY_LIST, listKeys, JSP_MANAGE_KEYS );
 
@@ -147,6 +140,7 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
 
         List<String> listAvailableKeys = (List<String>) KeyHome.getAvailableKeysList(  );
         model.put( MARK_LIST_AVAILABLE_KEYS, listAvailableKeys );
+
         return getPage( PROPERTY_PAGE_TITLE_CREATE_KEY, TEMPLATE_CREATE_KEY, model );
     }
 
@@ -187,8 +181,8 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
         UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_KEY ) );
         url.addParameter( PARAMETER_PREF_KEY, strPrefKey );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_KEY,
-                url.getUrl(  ), AdminMessage.TYPE_CONFIRMATION );
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_KEY, url.getUrl(  ),
+                AdminMessage.TYPE_CONFIRMATION );
 
         return redirect( request, strMessageUrl );
     }
@@ -220,7 +214,7 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
     {
         String strPrefKey = String.valueOf( request.getParameter( PARAMETER_PREF_KEY ) );
 
-        if ( _key == null || ( _key.getPrefKey(  ) != strPrefKey ))
+        if ( ( _key == null ) || ( _key.getPrefKey(  ) != strPrefKey ) )
         {
             _key = KeyHome.findByPrimaryKey( strPrefKey );
         }
@@ -247,6 +241,7 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
         {
             Map<String, String> mapParameters = new HashMap<String, String>(  );
             mapParameters.put( PARAMETER_PREF_KEY, _key.getPrefKey(  ) );
+
             return redirect( request, VIEW_MODIFY_KEY, mapParameters );
         }
 
@@ -255,7 +250,7 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
 
         return redirectView( request, VIEW_MANAGE_KEYS );
     }
-    
+
     /**
      * Export the values from core_user_preferences into csv file
      * @param request The Http request
@@ -269,8 +264,7 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
         {
             //Génère le CSV
             String strFormatExtension = AppPropertiesService.getProperty( PROPERTY_CSV_EXTENSION );
-            String strFileName = AppPropertiesService.getProperty( PROPERTY_CSV_FILE_NAME ) + "." +
-                strFormatExtension;
+            String strFileName = AppPropertiesService.getProperty( PROPERTY_CSV_FILE_NAME ) + "." + strFormatExtension;
             UserPreferencesExportUtils.addHeaderResponse( request, response, strFileName, strFormatExtension );
 
             OutputStream os = response.getOutputStream(  );

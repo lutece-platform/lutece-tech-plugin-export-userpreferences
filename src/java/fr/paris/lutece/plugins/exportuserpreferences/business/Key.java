@@ -30,32 +30,30 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
-import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
+
+import javax.validation.constraints.*;
 
 
 /**
  * This is the business class for the object Key
- */ 
+ */
 public class Key
 {
     // Variables declarations 
-    
     @NotEmpty( message = "#i18n{exportuserpreferences.validation.key.PrefKey.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{exportuserpreferences.validation.key.PrefKey.size}" ) 
+    @Size( max = 50, message = "#i18n{exportuserpreferences.validation.key.PrefKey.size}" )
     private String _strPrefKey;
-    
     private boolean _bToExport;
-
 
     /**
      * Returns the PrefKey
      * @return The PrefKey
      */
-    public String getPrefKey( )
+    public String getPrefKey(  )
     {
         return _strPrefKey;
     }
@@ -63,16 +61,17 @@ public class Key
     /**
      * Sets the PrefKey
      * @param strPrefKey The PrefKey
-     */ 
+     */
     public void setPrefKey( String strPrefKey )
     {
         _strPrefKey = strPrefKey;
     }
+
     /**
      * Returns the ToExport
      * @return The ToExport
      */
-    public boolean getToExport( )
+    public boolean getToExport(  )
     {
         return _bToExport;
     }
@@ -80,7 +79,7 @@ public class Key
     /**
      * Sets the ToExport
      * @param bToExport The ToExport
-     */ 
+     */
     public void setToExport( boolean bToExport )
     {
         _bToExport = bToExport;
