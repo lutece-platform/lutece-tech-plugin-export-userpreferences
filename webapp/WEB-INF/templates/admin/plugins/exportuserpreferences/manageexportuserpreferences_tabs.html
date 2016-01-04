@@ -1,0 +1,11 @@
+<#macro tabs tab >
+<div>
+    <ul class="nav nav-tabs">
+        <li <#if tab="key">class="active"</#if>>
+            <a href="jsp/admin/plugins/exportuserpreferences/ManageKeys.jsp">
+                #i18n{exportuserpreferences.manage_keys.pageTitle}
+            </a>
+        </li>
+    </ul>
+</div>
+</#macro>

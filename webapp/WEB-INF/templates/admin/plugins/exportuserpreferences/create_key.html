@@ -1,0 +1,22 @@
+<#include "manageexportuserpreferences_tabs.html" />
+<@tabs tab="key" />
+
+<@rowBoxHeader i18nTitleKey="exportuserpreferences.create_key.pageTitle">
+    <form class="form-horizontal" method="post" name="create_key" action="jsp/admin/plugins/exportuserpreferences/ManageKeys.jsp">
+        <@messages errors=errors />
+        <div class="form-group">
+            <label  class="control-label col-xs-12 col-sm-12 col-md-3 col-lg-3" for="pref_key" >#i18n{exportuserpreferences.create_key.labelPrefKey} * :</label>
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                <select id="pref_key" name="pref_key">
+                <#list list_available_keys as available_key>
+                    <option value="${(available_key)!}" <#if key.prefKey?? && key.prefKey==available_key>selected="selected"</#if>>${(available_key)!}</option>
+                </#list>
+                </select>
+                <p class="help-block">#i18n{exportuserpreferences.create_key.labelPrefKey.help}</p>  
+            </div>
+        </div>
+        <@fieldInputCheckBox i18nLabelKey="exportuserpreferences.create_key.labelToExport" inputName="to_export" value="true" i18nHelpBlockKey="exportuserpreferences.create_key.labelToExport.help" checked=true/>
+        <@actionButtons button1Name="action_createKey" button2Name="view_manageKeys"/>
+    </form>
+</@rowBoxHeader>
+

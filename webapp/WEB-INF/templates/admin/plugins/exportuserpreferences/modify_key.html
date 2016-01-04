@@ -1,0 +1,19 @@
+<#include "manageexportuserpreferences_tabs.html" />
+<@tabs tab="key" />
+
+<@rowBoxHeader i18nTitleKey="exportuserpreferences.modify_key.pageTitle">
+    <form class="form-horizontal" method="post" name="modify_key" action="jsp/admin/plugins/exportuserpreferences/ManageKeys.jsp">
+        <@messages errors=errors />
+        <div class="form-group">
+            <label class="col-md-3 control-label">                                                                  
+                #i18n{exportuserpreferences.modify_key.labelPrefKey} :
+            </label>       
+            <div class="col-md-9">                
+                <input type="text" class="form-control input-md" name="pref_key" value="${key.prefKey!''}" readonly />       
+            </div>
+        </div>
+        <@fieldInputCheckBox i18nLabelKey="exportuserpreferences.modify_key.labelToExport" inputName="to_export" value="true" i18nHelpBlockKey="exportuserpreferences.modify_key.labelToExport.help" checked=key.toExport!false/>
+        <@actionButtons button1Name="action_modifyKey" button2Name="view_manageKeys"/>
+    </form>
+</@rowBoxHeader>
+
