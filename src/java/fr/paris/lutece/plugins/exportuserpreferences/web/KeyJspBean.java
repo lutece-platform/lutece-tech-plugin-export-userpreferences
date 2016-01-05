@@ -256,12 +256,11 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
      * @param request The Http request
      * @param response The Http response
      */
-    public void doExportCSV( HttpServletRequest request, HttpServletResponse response )
+    public String doExportCSV( HttpServletRequest request, HttpServletResponse response )
     {
-        Map<String, ArrayList<String>> listValues = (Map<String, ArrayList<String>>) KeyHome.getValuesList(  );
-
         try
         {
+            Map<String, ArrayList<String>> listValues = (Map<String, ArrayList<String>>) KeyHome.getValuesList(  );
             //Génère le CSV
             String strFormatExtension = AppPropertiesService.getProperty( PROPERTY_CSV_EXTENSION );
             String strFileName = AppPropertiesService.getProperty( PROPERTY_CSV_FILE_NAME ) + "." + strFormatExtension;
@@ -276,10 +275,17 @@ public class KeyJspBean extends ManageExportuserpreferencesJspBean
 
             os.flush(  );
             os.close(  );
+            
         }
         catch ( IOException e )
         {
             AppLogService.error( e );
         }
+        catch ( Exception e )
+        {
+            return AdminMessageService.getMessageUrl( request, UserPreferencesExportUtils.ERROR_MISSING_HEADER, AdminMessage.TYPE_ERROR );
+        }
+        
+        return redirectView( request, VIEW_MANAGE_KEYS );
     }
 }

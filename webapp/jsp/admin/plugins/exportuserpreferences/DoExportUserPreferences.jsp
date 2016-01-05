@@ -5,5 +5,5 @@
 <jsp:useBean id="key" scope="session" class="fr.paris.lutece.plugins.exportuserpreferences.web.KeyJspBean" />
 <% 
     key.init( request, KeyJspBean.RIGHT_MANAGEEXPORTUSERPREFERENCES );
-   	key.doExportCSV(request, response);
+	response.sendRedirect( key.doExportCSV( request, response ) );
 %>

@@ -43,6 +43,7 @@ import javax.servlet.http.HttpServletResponse;
 public final class UserPreferencesExportUtils
 {
     public static final String ERROR_NOTHING_TO_EXPORT = "exportuserpreferences.message.csv.error.nothingToExport";
+    public static final String ERROR_MISSING_HEADER = "exportuserpreferences.message.csv.error.missingHeader";
     private static final String CSV = "csv";
     private static final String APPLICATION_CSV = "application/csv";
     private static final String CONTENT_DISPOSITION = "Content-Disposition";

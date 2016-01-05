@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.exportuserpreferences.business;
 
 import fr.paris.lutece.plugins.exportuserpreferences.utils.CsvUtils;
+import fr.paris.lutece.plugins.exportuserpreferences.utils.export.UserPreferencesExportUtils;
 import fr.paris.lutece.plugins.exportuserpreferences.web.KeyJspBean;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
@@ -217,27 +218,30 @@ public final class KeyDAO implements IKeyDAO
             String prefKey = daoUtil.getString( 2 );
             Integer valuePosition = headers.get( prefKey );
 
+            if ( valuePosition == null )
+            {
+                throw new RuntimeException( UserPreferencesExportUtils.ERROR_MISSING_HEADER );
+            }
             if ( values == null )
             {
                 values = new ArrayList<String>( headers.size(  ) );
-
-                for ( int n = 0; n < valuePosition; n++ )
-                {
-                    values.add( "" );
-                }
-
-                values.add( valuePosition, prefValue );
-                map.put( daoUtil.getString( 1 ), values );
             }
-            else
+            
+            if ( valuePosition >= values.size(  ) )
             {
                 for ( int n = values.size(  ); n < valuePosition; n++ )
                 {
                     values.add( "" );
                 }
-
                 values.add( valuePosition, prefValue );
             }
+            else
+            {
+                values.set( valuePosition, prefValue );
+            }
+            
+            map.put( daoUtil.getString( 1 ), values );
+            
         }
 
         daoUtil.free(  );
