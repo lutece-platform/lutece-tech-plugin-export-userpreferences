@@ -128,7 +128,7 @@ public class CsvUtils
      * @param cle A property prefix
      * @param listeResultat The results
      * @param out An OutputStream
-     * @param local The Locale
+     * @param locale The Locale
      */
     public static void ecrireCsv( String cle, Map<String, ArrayList<String>> listeResultat, OutputStream out,
         Locale locale )
