@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-export-userpreferences</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>Lutece exportuserpreferences plugin</name>
 
     <repositories>
@@ -46,6 +46,6 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-tech-plugin-export-userpreferences.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-tech-plugin-export-userpreferences.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-tech-plugin-export-userpreferences.git</url>
-    <tag>HEAD</tag>
+    <tag>plugin-export-userpreferences-1.0.1</tag>
   </scm>
 </project>
