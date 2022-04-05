@@ -133,7 +133,7 @@ public final class KeyHome
 
     /**
      * Load the values which are exported and returns them in form of a map
-     * @return the map which contains the (user_id -> values of its keys) of all the key objects to export
+     * @return the map which contains the user_id as key and a collection of values of all the key objects to export
      */
     public static Map<String, ArrayList<String>> getValuesList(  )
     {

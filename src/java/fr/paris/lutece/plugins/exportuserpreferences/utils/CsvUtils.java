@@ -125,11 +125,10 @@ public class CsvUtils
      * Ecrit sur la sortie passée en paramètre, les lignes de csv.
      * Attention : ne gère pas l'écriture des en-têtes (content type par
      * exemple) ni la fermeture du flux de sortie.
-     * @param cle
-     * @param <R> type du DTO résultat
-     * @param businessDTO
-     * @param listeResultat
-     * @param out
+     * @param cle A property prefix
+     * @param listeResultat The results
+     * @param out An OutputStream
+     * @param local The Locale
      */
     public static void ecrireCsv( String cle, Map<String, ArrayList<String>> listeResultat, OutputStream out,
         Locale locale )

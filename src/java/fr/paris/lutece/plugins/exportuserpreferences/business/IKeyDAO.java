@@ -61,7 +61,7 @@ public interface IKeyDAO
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the Key to delete
+     * @param prefKey The identifier of the key
      * @param plugin the Plugin
      */
     void delete( String prefKey, Plugin plugin );
